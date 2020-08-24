@@ -8,31 +8,23 @@
       <label for="password">pw: </label>
       <input id="password" type="text" v-model="password" />
     </div>
-    <div>
-      <label for="nickname">nickname: </label>
-      <input id="nickname" type="text" v-model="nickname" />
-    </div>
-    <button
-      type="submit"
-      :disabled="!isUserNameValid || !password || !nickname"
-    >
-      회원가입
+    <button type="submit" :disabled="!isUserNameValid || !password">
+      로그인
     </button>
     <p>{{ logMessage }}</p>
   </form>
 </template>
 
 <script>
-import { registerUser } from '@/api/index.js';
+import { loginUser } from '@/api/index.js';
 import { validateEmail } from '@/utils/validation';
 
 export default {
   data() {
     return {
-      // form values
+      // form value
       username: '',
       password: '',
-      nickname: '',
 
       // log
       logMessage: '',
@@ -40,25 +32,27 @@ export default {
   },
   computed: {
     isUserNameValid() {
-      return validateEmail(this.user);
+      return validateEmail(this.username);
     },
   },
   methods: {
     async submitForm() {
       try {
-        console.log('form submit');
+        // 비지니스 로직
         const userData = {
           username: this.username,
           password: this.password,
-          nickname: this.nickname,
         };
 
-        const { data } = await registerUser(userData);
-        console.log(data);
-        this.logMessage = `${data.username}님이 가입되었습니다.`;
+        const { data } = await loginUser(userData);
+        console.log(data.user.username);
+        this.logMessage = `${data.user.username} 님 환영합니다.`;
+
+        // this.initForm();
       } catch (error) {
-        console.log(error.respose.data);
-        this.logMessage = error.respose.data;
+        // 에러 핸들링할 코드
+        console.log(error.response.data);
+        this.logMessage = error.response.data;
       } finally {
         this.initForm();
       }
@@ -66,7 +60,6 @@ export default {
     initForm() {
       this.username = '';
       this.password = '';
-      this.nickname = '';
     },
   },
 };
