@@ -10,8 +10,9 @@ export default new VueRouter({
   routes: [
     {
       path: '/',
-      redirect: '/login',
+      redirect: '/main',
     },
+
     {
       path: '/login',
       component: () => import('@/views/LoginPage.vue'), // 코드 스플릿트
@@ -19,6 +20,10 @@ export default new VueRouter({
     {
       path: '/signup',
       component: () => import('@/views/SignupPage.vue'),
+    },
+    {
+      path: '/main',
+      component: () => import('@/views/MainPage.vue'),
     },
     {
       path: '*',

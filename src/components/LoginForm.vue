@@ -1,23 +1,21 @@
 <template>
-  <div id="wrap">
-    <form id="form" @submit.prevent="submitForm">
-      <h2>Login to TIL</h2>
-      <div class="input">
-        <label for="username">id: </label>
-        <input id="username" type="text" v-model="username" />
-      </div>
-      <div class="input">
-        <label for="password">pw: </label>
-        <input id="password" type="text" v-model="password" />
-      </div>
-      <div class="action-login">
-        <button type="submit" :disabled="!isUserNameValid || !password">
-          로그인
-        </button>
-      </div>
-      <p>{{ logMessage }}</p>
-    </form>
-  </div>
+  <form id="form" @submit.prevent="submitForm">
+    <h2>Login to TIL</h2>
+    <div class="input">
+      <label for="username">id: </label>
+      <input id="username" type="text" v-model="username" />
+    </div>
+    <div class="input">
+      <label for="password">pw: </label>
+      <input id="password" type="text" v-model="password" />
+    </div>
+    <div class="action-login">
+      <button type="submit" :disabled="!isUserNameValid || !password">
+        로그인
+      </button>
+    </div>
+    <p class="log-message">{{ logMessage }}</p>
+  </form>
 </template>
 
 <script>
@@ -50,8 +48,10 @@ export default {
         };
 
         const { data } = await loginUser(userData);
+        this.$store.commit('setUsername', data.user.username);
         console.log(data.user.username);
-        this.logMessage = `${data.user.username} 님 환영합니다.`;
+        // this.logMessage = `${data.user.username} 님 환영합니다.`;
+        this.$router.push('/main');
 
         // this.initForm();
       } catch (error) {
@@ -71,10 +71,6 @@ export default {
 </script>
 
 <style scoped>
-#wrap {
-  width: 100%;
-}
-
 #form {
   display: inline-block;
   /* text-align: center; */
@@ -127,5 +123,10 @@ input {
   margin-top: 1rem;
   padding: 0.7rem 0.7rem;
   font-size: 1rem;
+}
+
+.log-message {
+  margin-top: 1rem;
+  color: whitesmoke;
 }
 </style>

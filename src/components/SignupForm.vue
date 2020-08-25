@@ -1,30 +1,28 @@
 <template>
-  <div id="wrap">
-    <form id="form" @submit.prevent="submitForm">
-      <h2>Sign up to TIL</h2>
-      <div class="input">
-        <label for="username">id: </label>
-        <input id="username" type="text" v-model="username" />
-      </div>
-      <div class="input">
-        <label for="password">pw: </label>
-        <input id="password" type="text" v-model="password" />
-      </div>
-      <div class="input">
-        <label for="nickname">nickname: </label>
-        <input id="nickname" type="text" v-model="nickname" />
-      </div>
-      <div class="action-signup">
-        <button
-          type="submit"
-          :disabled="!isUserNameValid || !password || !nickname"
-        >
-          회원가입
-        </button>
-      </div>
-      <p>{{ logMessage }}</p>
-    </form>
-  </div>
+  <form id="form" @submit.prevent="submitForm">
+    <h2>Sign up to TIL</h2>
+    <div class="input">
+      <label for="username">id: </label>
+      <input id="username" type="text" v-model="username" />
+    </div>
+    <div class="input">
+      <label for="password">pw: </label>
+      <input id="password" type="text" v-model="password" />
+    </div>
+    <div class="input">
+      <label for="nickname">nickname: </label>
+      <input id="nickname" type="text" v-model="nickname" />
+    </div>
+    <div class="action-signup">
+      <button
+        type="submit"
+        :disabled="!isUserNameValid || !password || !nickname"
+      >
+        회원가입
+      </button>
+    </div>
+    <p class="log-message">{{ logMessage }}</p>
+  </form>
 </template>
 
 <script>
@@ -78,10 +76,6 @@ export default {
 </script>
 
 <style scoped>
-#wrap {
-  width: 100%;
-}
-
 #form {
   display: inline-block;
   /* text-align: center; */
@@ -134,5 +128,10 @@ input {
   margin-top: 1rem;
   padding: 0.7rem 0.7rem;
   font-size: 1rem;
+}
+
+.log-message {
+  margin-top: 1rem;
+  color: whitesmoke;
 }
 </style>

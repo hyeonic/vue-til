@@ -1,15 +1,35 @@
 <template>
   <header>
-    <div class="logo">Today I Learned</div>
+    <div class="logo">
+      <router-link to="/">Today I Learned </router-link>
+    </div>
     <div class="nav">
-      <router-link to="/login">로그인</router-link>
-      <router-link to="signup">회원가입</router-link>
+      <template v-if="isLogin">
+        <span class="username">{{ $store.state.username }}</span>
+        <a href="javascript:;" @click="logoutUser">Logout</a>
+      </template>
+      <template v-else>
+        <router-link to="/login">로그인</router-link>
+        <router-link to="signup">회원가입</router-link>
+      </template>
     </div>
   </header>
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    isLogin() {
+      return this.$store.getters.isLogin;
+    },
+  },
+  methods: {
+    logoutUser() {
+      this.$store.commit('clearUsername');
+      this.$router.push('/login');
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -35,11 +55,16 @@ header {
 
 .nav {
   margin-left: auto;
+  margin-right: 0.5rem;
 }
 
 .logo,
 .nav {
   flex: none;
+}
+
+.logo > a {
+  color: whitesmoke;
 }
 
 .nav a {
@@ -55,5 +80,10 @@ header {
 .nav a:hover {
   background-color: rgb(9, 171, 124);
   color: whitesmoke;
+}
+
+.username {
+  color: whitesmoke;
+  font-size: 1.2rem;
 }
 </style>
