@@ -3,9 +3,11 @@
     <div class="logo">
       <router-link to="/">Today I Learned </router-link>
     </div>
+    <span class="username" v-show="isLogin"
+      >by {{ $store.state.username }}</span
+    >
     <div class="nav">
       <template v-if="isLogin">
-        <span class="username">{{ $store.state.username }}</span>
         <a href="javascript:;" @click="logoutUser">Logout</a>
       </template>
       <template v-else>
@@ -84,6 +86,7 @@ header {
 
 .username {
   color: whitesmoke;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  margin-left: 1rem;
 }
 </style>
