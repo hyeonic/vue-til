@@ -1,7 +1,6 @@
 <template>
-  <div>
+  <div id="wrap">
     <div class="posts">
-      <h1>Today I Learned</h1>
       <loading-spinner v-if="isLoading">
         Loading...
       </loading-spinner>
@@ -18,6 +17,7 @@
         </li> -->
       </ul>
     </div>
+    <router-link class="create-button" to="/add">+</router-link>
   </div>
 </template>
 
@@ -52,10 +52,30 @@ export default {
 </script>
 
 <style scoped>
+.wrap {
+  position: relative;
+}
+
 h1 {
   text-align: center;
 }
 
+.create-button {
+  position: fixed;
+  right: 3rem;
+  bottom: 3rem;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  line-height: 2.5rem;
+  font-size: 2rem;
+  background-color: rgb(9, 171, 124);
+  color: whitesmoke;
+}
 /* .post {
   margin: 1rem;
   border: 1px solid #ccc;
