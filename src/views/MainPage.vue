@@ -1,14 +1,13 @@
 <template>
   <div id="wrap">
     <div class="posts">
-      <loading-spinner v-if="isLoading">
-        Loading...
-      </loading-spinner>
+      <loading-spinner v-if="isLoading"></loading-spinner>
       <ul v-else>
         <post-list-item
           v-for="(post, index) in posts"
           :key="index"
           :post="post"
+          @refresh="fetchPosts"
         ></post-list-item>
         <!-- <li class="post" v-for="(post, index) in posts" :key="index">
           <div class="post-title">{{ post.title }}</div>
@@ -24,7 +23,7 @@
 <script>
 import PostListItem from '@/components/posts/PostListItem.vue';
 import LoadingSpinner from '@/components/common/LoadingSpinner.vue';
-import { fetchPosts } from '@/api/index.js';
+import { fetchPosts } from '@/api/posts.js';
 
 export default {
   data() {
@@ -54,6 +53,7 @@ export default {
 <style scoped>
 .wrap {
   position: relative;
+  width: 100%;
 }
 
 h1 {
@@ -100,4 +100,10 @@ h1 {
   font-size: 14px;
   color: #9e9e9e;
 } */
+
+.posts > ul {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
 </style>
