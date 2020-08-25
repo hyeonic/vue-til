@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1>회원 가입 페이지</h1>
+  <div id="wrap">
     <signup-form></signup-form>
   </div>
 </template>
@@ -15,4 +14,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+#wrap {
+  width: 100%;
+  margin-top: 20%;
+  align-items: center;
+  text-align: center;
+}
+</style>
