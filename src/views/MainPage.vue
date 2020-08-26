@@ -103,7 +103,8 @@ h1 {
 
 .posts > ul {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  padding: 0.5rem;
 }
 </style>

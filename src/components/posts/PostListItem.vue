@@ -3,7 +3,7 @@
     <div class="post-title">{{ post.title }}</div>
     <div class="post-contents">{{ post.contents }}</div>
     <div class="post-created">
-      {{ post.createdAt }}
+      {{ post.createdAt | formatDate }}
       <ion-icon name="create-outline" size="large" @click="editItem"></ion-icon>
       <ion-icon
         name="trash-outline"
@@ -24,6 +24,11 @@ export default {
       required: true,
     },
   },
+  //   filters: {
+  //     formatDate(value) {
+  //       return new Date(value);
+  //     },
+  //   },
   methods: {
     async deleteItem() {
       if (confirm('You want to delete it?')) {
@@ -41,12 +46,12 @@ export default {
 
 <style scoped>
 .post {
-  margin: 1rem;
+  margin: 0.5rem;
   border: 1px solid #ccc;
   padding: 1rem;
   position: relative;
-  flex-grow: 1;
-  width: 30%;
+  /* flex-grow: 1; */
+  /* width: 30%; */
 }
 
 .post-title {

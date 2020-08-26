@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="logo">
-      <router-link to="/">Today I Learned </router-link>
+      <router-link :to="logoLink">Today I Learned </router-link>
     </div>
     <span class="username" v-show="isLogin"
       >by {{ $store.state.username }}</span
@@ -19,15 +19,23 @@
 </template>
 
 <script>
+import { deleteCookie } from '@/utils/cookies.js';
+
 export default {
   computed: {
     isLogin() {
       return this.$store.getters.isLogin;
     },
+    logoLink() {
+      return this.$store.getters.isLogin ? '/main' : '/login';
+    },
   },
   methods: {
     logoutUser() {
       this.$store.commit('clearUsername');
+      this.$store.commit('clearToken');
+      deleteCookie('til_auth');
+      deleteCookie('til_user');
       this.$router.push('/login');
     },
   },
